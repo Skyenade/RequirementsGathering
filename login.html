@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- <link rel="stylesheet" type="text/css" href="game.css"> -->
+  <style>
+    #start-background {
+      background-color: #332a40;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #form-background {
+      background-color: white;
+      padding: 30px;
+      width: 400px;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    }
+
+    .input-form {
+      width: 100%;
+      margin-top: 10px;
+      border: none;
+      height: 25px;
+    }
+
+    #signin-button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #35264b;
+      border: solid #8c8299 1px;
+      color: white;
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    #signup-button {
+      background-color: white;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: solid #033076 1px;
+      color: #033076;
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="start-background">
+    <div id="form-background">
+      <h2>Sign In</h2>
+      <label>Hi there! Nice to see you again.</label>
+      <br />
+      <br />
+      <label style="color: #033076; font-weight: bold">Email</label>
+      <input id="email" class="input-form" type="email" placeholder="Your email address" required />
+      <hr />
+      <span id="emailerr" class="error"></span>
+      <br />
+      <br>
+      <label style="color: #033076; font-weight: bold">Password</label>
+      <input id="password" class="input-form" type="password" placeholder="• • • • • • • •" required />
+      <hr />
+      <span id="passworderr" class="error"></span>
+      <br>
+      <br>
+      <button id="signin-button" onclick="goToHomePage()">Sign In</button>
+      <br />
+      <br />
+      <label>Don't have an account?</label>
+      <br />
+      <br />
+      <button id="signup-button" onclick="goToSignUp()">Sign Up</button>
+    </div>
+  </div>
+
+  <script>
+    function goToHomePage() {
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+
+      var emailPattern = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+      var passwordPattern = /^.{8,}$/;
+
+      var isValid = true;
+
+      if (!emailPattern.test(email)) {
+        document.getElementById("emailerr").innerHTML = "INVALID EMAIL";
+        isValid = false;
+      } else {
+        document.getElementById("emailerr").innerHTML = '';
+      }
+
+      if (!passwordPattern.test(password)) {
+        document.getElementById("passworderr").innerHTML = "INVALID PASSWORD";
+        isValid = false;
+      } else {
+        document.getElementById("passworderr").innerHTML = '';
+      }
+
+      if (isValid) {
+        sessionStorage.setItem('email', email);
+        window.location.href = "user-home-page.html";
+      }
+    }
+
+    function goToSignUp() {
+      window.location.href = "signup.html";
+    }
+  </script>
+
+</body>
+
+</html>

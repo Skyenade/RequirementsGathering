@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #leaderboard-background {
+            background-image: url('menu-background-4.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #board {
+            background-color: rgb(221, 221, 221);
+            width: 500px;
+            padding: 50px;
+        }
+
+        #return {
+            background-image: url('back.png');
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            top: 2vh;
+            left: 2vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        #confirm {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #355e81;
+            color: white;
+            font-weight: bold;
+            width: 70%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="leaderboard-background">
+        <div id="return" onclick="goToHomePage()"></div>
+        <div id="board">
+            <h3 style="text-align: center;">Settings</h3>
+            <br>
+            <h5>Music:</h5>
+            <input type="range" name="music" min="0" max="100" step="5" value="50">
+            <br>
+            <br>
+            <h5>Sound Effects:</h5>
+            <input type="range" name="sfx" min="0" max="100" step="5" value="50">
+            <br>
+            <br>
+            <h5>Language: </h5><br>
+            <div>
+                <div id="language-display"></div><br>
+                <table style="border-spacing: 30px;">
+                    <tr>
+                        <td><input type="radio" id="eng" name="lang" value="eng">English</td>
+                        <td><input type="radio" id="fra" name="lang" value="fra">Français</td>
+                        <td><input type="radio" id="port" name="lang" value="port">Português</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="save-button">
+            <button id="confirm" onclick="confirmChanges()">Confirm Changes</button>
+        </div>
+    </div>
+
+    <script>
+        var email = sessionStorage.getItem('email');
+        sessionStorage.setItem('email', email);
+
+        var color = sessionStorage.getItem('color');
+        sessionStorage.setItem('color', color);
+
+        var username = document.getElementById('username').value;
+        sessionStorage.setItem('username', username);
+
+        var language = sessionStorage.getItem('lang');
+
+        window.onload = function () {
+            if (language == 'eng') {
+                document.getElementById('eng').checked = true;
+            } else if (language == 'fra') {
+                document.getElementById('fra').checked = true;
+            } else if (language == 'port') {
+                document.getElementById('port').checked = true;
+            }
+        };
+
+        function goToHomePage() {
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+
+        function confirmChanges() {
+
+            var engChoice = document.getElementById('eng');
+            var fraChoice = document.getElementById('fra');
+            var portChoice = document.getElementById('port');
+
+            var languageDisplay = document.getElementById('language-display');
+
+            if (engChoice.checked) {
+                languageDisplay.innerText = 'eng';
+                sessionStorage.setItem('lang', 'eng');
+                fraChoice.checked = false;
+                portChoice.checked = false;
+            } else if (portChoice.checked) {
+                languageDisplay.innerText = 'port';
+                sessionStorage.setItem('lang', 'port');
+                fraChoice.checked = false;
+                engChoice.checked = false;
+            } else if (fraChoice.checked) {
+                languageDisplay.innerText = 'fra';
+                sessionStorage.setItem('lang', 'fra');
+                portChoice.checked = false;
+                engChoice.checked = false;
+            }
+
+
+            goToHomePage()
+        }
+
+    </script>
+
+</body>
+
+</html>

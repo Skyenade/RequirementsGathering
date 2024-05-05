@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Sign In</title>
   <!-- <link rel="stylesheet" type="text/css" href="game.css"> -->
   <style>
     #start-background {
@@ -72,6 +72,12 @@
       <input id="email" class="input-form" type="email" placeholder="Your email address" required />
       <hr />
       <span id="emailerr" class="error"></span>
+      <br>
+      <br>
+      <label style="color: #033076; font-weight: bold">Username</label>
+      <input id="username" class="input-form" type="text" placeholder="Your username" required />
+      <hr />
+      <span id="usernameerr" class="error"></span>
       <br />
       <br>
       <label style="color: #033076; font-weight: bold">Password</label>
@@ -93,10 +99,13 @@
   <script>
     function goToHomePage() {
       var email = document.getElementById("email").value;
+      var username = document.getElementById("username").value;
+
       var password = document.getElementById("password").value;
 
       var emailPattern = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
       var passwordPattern = /^.{8,}$/;
+      var usernamePattern = /^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
 
       var isValid = true;
 
@@ -107,6 +116,13 @@
         document.getElementById("emailerr").innerHTML = '';
       }
 
+      if (!usernamePattern.test(username)) {
+        document.getElementById("usernameerr").innerHTML = "INVALID USERNAME";
+        isValid = false;
+      } else {
+        document.getElementById("usernameerr").innerHTML = '';
+      }
+
       if (!passwordPattern.test(password)) {
         document.getElementById("passworderr").innerHTML = "INVALID PASSWORD";
         isValid = false;
@@ -115,8 +131,13 @@
       }
 
       if (isValid) {
+        sessionStorage.setItem('username', username);
         sessionStorage.setItem('email', email);
-        window.location.href = "user-home-page.html";
+        if (email === "admin@gmail.com") {
+          window.location.href = "admin-home-page.html";
+        } else{
+          window.location.href = "user-home-page.html";
+        }
       }
     }
 

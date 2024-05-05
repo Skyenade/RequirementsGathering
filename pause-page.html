@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pause</title>
+    <style>
+        #pause-background {
+            background-image: url('pause-background.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #redo {
+            background-image: url('redo.png');
+            background-size: cover;
+            position: absolute;
+            width: 3vw;
+            height: 3vw;
+            top: 5vh;
+            left: 4vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        #home-button {
+            background-image: url('home-button.png');
+            position: absolute;
+            width: 3vw;
+            height: 3vw;
+            top: 5vh;
+            right: 4vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        #pause-div {
+            background-color: rgb(38, 63, 126);
+            padding: 40px 80px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        #play {
+            background-image: url('play-button.png');
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+            left: 47%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pause-background">
+        <div>
+            <div id="redo" onclick="goToPlay()"></div>
+            <div id="home-button" onclick="goToHomePage()"></div>
+            <div id="pause-div">Pause</div>
+            <br>
+            <div id="play" onclick="goToPlay()"></div>
+        </div>
+    </div>
+
+    <script>
+
+        var email = sessionStorage.getItem('email');
+
+        sessionStorage.setItem('email', email);
+
+        var color = sessionStorage.getItem('color');
+        sessionStorage.setItem('color', color);
+
+        var language = sessionStorage.getItem('lang');
+        sessionStorage.setItem('lang', language);
+
+        function goToHomePage() {
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+        function goToPlay() {
+            window.location.href = "play-page.html";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #leaderboard-background {
+            background-image: url('menu-background-4.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #board {
+            background-color: rgb(221, 221, 221);
+            width: 500px;
+            padding: 50px;
+        }
+
+        #return {
+            background-image: url('back.png');
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            top: 2vh;
+            left: 2vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #355e81;
+            color: white;
+            font-weight: bold;
+            width: 50%;
+            margin-top: 20px;
+        }
+
+        #confirm {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #355e81;
+            color: white;
+            font-weight: bold;
+            width: 70%;
+            max-width: 300px;
+        }
+
+        .input-container {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="leaderboard-background">
+        <div id="return" onclick="goToHomePage()"></div>
+        <div id="board">
+            <h3 style="text-align: center;">Ban a user</h3>
+            <br>
+            <h5>Username:</h5>
+            <input type="text" class="input-container" id="banUsername" required>
+            <br>
+            <span id="usernameerr" class="error"></span>
+            <br>
+            <br>
+            <h5>Description:</h5>
+            <textarea id="description" class="input-container" required></textarea>
+            <span id="descriptionerr" class="error"></span>
+            <br>
+        </div>
+        <button id="confirm" onclick="confirmChanges()">Confirm Changes</button>
+    </div>
+
+
+
+    <script>
+
+        var color = sessionStorage.getItem('color');
+        sessionStorage.setItem('color', color);
+
+        var language = sessionStorage.getItem('lang');
+        sessionStorage.setItem('lang', language);
+
+        function confirmChanges() {
+            var email = sessionStorage.getItem('email');
+            sessionStorage.setItem('email', email);
+
+            var banUsername = document.getElementById("banUsername").value;
+            var description = document.getElementById("description").value;
+
+            var descriptionPattern = /^(.|\s)*[a-zA-Z]+(.|\s)*$/;
+            var usernamePattern = /^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+
+            var isValid = true;
+
+            if (!usernamePattern.test(banUsername)) {
+                document.getElementById("usernameerr").innerHTML = "INVALID USERNAME";
+                isValid = false;
+            } else {
+                document.getElementById("usernameerr").innerHTML = '';
+            }
+
+            if (!descriptionPattern.test(description)) {
+                document.getElementById("descriptionerr").innerHTML = "INVALID DESCRIPTION";
+                isValid = false;
+            } else {
+                document.getElementById("descriptionerr").innerHTML = '';
+            }
+
+            if (isValid) {
+                var email = sessionStorage.getItem('email');
+                var username = sessionStorage.getItem('username');
+
+                sessionStorage.setItem('username', username);
+                sessionStorage.setItem('email', email);
+
+                goToHomePage();
+            }
+        }
+
+        function goToHomePage() {
+            var email = sessionStorage.getItem('email');
+            sessionStorage.setItem('email', email);
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

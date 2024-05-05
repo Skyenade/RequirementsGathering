@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #leaderboard-background {
+            background-image: url('menu-background-4.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #board {
+            background-color: rgb(221, 221, 221);
+            width: 500px;
+            padding: 50px;
+        }
+
+        #return {
+            background-image: url('back.png');
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            top: 2vh;
+            left: 2vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        #confirm {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #355e81;
+            color: white;
+            font-weight: bold;
+            width: 70%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="leaderboard-background">
+        <div id="return" onclick="goToHomePage()"></div>
+        <div id="board">
+            <h3 style="text-align: center;">Customize</h3>
+            <br>
+            <h5>New Username:</h5>
+            <input style="margin-top: 20px; width: 100%; border-radius: 5px;" type="text" id="username">
+            <br>
+            <br>
+            <br>
+            <h5>Color: </h5><br>
+            <div>
+                <div id="color-display"></div><br>
+                <table style="border-spacing: 30px;">
+                    <tr>
+                        <td><input type="radio" id="black" name="color" value="black">Black</td>
+                        <td><input type="radio" id="yellow" name="color" value="yellow">Yellow</td>
+                        <td><input type="radio" id="green" name="color" value="green">Green</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="save-button">
+            <button id="confirm" onclick="confirmChanges()">Confirm Changes</button>
+        </div>
+    </div>
+
+
+    <script>
+
+        var email = sessionStorage.getItem('email');
+        sessionStorage.setItem('email', email);
+
+        var language = sessionStorage.getItem('lang');
+        sessionStorage.setItem('lang', language);
+
+
+        var color = sessionStorage.getItem('color');
+
+        window.onload = function () {
+            if (color === 'yellow') {
+                document.getElementById('yellow').checked = true;
+            } else if (color === 'green') {
+                document.getElementById('green').checked = true;
+            } else if (color === 'black') {
+                document.getElementById('black').checked = true;
+            }
+        };
+
+        function goToHomePage() {
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+
+        function confirmChanges() {
+
+            var newUsername = document.getElementById('username').value;
+            if (newUsername !== '') {
+                sessionStorage.setItem('username', newUsername);
+                username = newUsername;
+            }
+
+            var blackChoice = document.getElementById('black');
+            var yellowChoice = document.getElementById('yellow');
+            var greenChoice = document.getElementById('green');
+
+            var colorDisplay = document.getElementById('color-display');
+
+            if (yellowChoice.checked) {
+                colorDisplay.innerText = 'Yellow';
+                sessionStorage.setItem('color', 'yellow');
+                blackChoice.checked = false;
+                greenChoice.checked = false;
+            } else if (greenChoice.checked) {
+                colorDisplay.innerText = 'Green';
+                sessionStorage.setItem('color', 'green');
+                blackChoice.checked = false;
+                yellowChoice.checked = false;
+            } else if (blackChoice.checked) {
+                colorDisplay.innerText = 'Black';
+                sessionStorage.setItem('color', 'black');
+                greenChoice.checked = false;
+                yellowChoice.checked = false;
+            }
+
+            goToHomePage()
+        }
+
+    </script>
+
+</body>
+
+</html>

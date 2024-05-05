@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Page</title>
+  <!-- <link rel="stylesheet" type="text/css" href="game.css"> -->
+  <style>
+    
+
+    #start-background {
+      background-color: #332a40;
+      flex-grow: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #game-logo {
+      width: 500px;
+      height: 230px;
+      background-image: url("game-logo.jpg");
+      background-size: 100%;
+      border-radius: 10px;
+    }
+
+    #buttons-cont {
+      display: flex;
+      align-items: center;
+      gap: 500px;
+      margin-top: 180px;
+    }
+
+    .buttons {
+      background-color: #a89eb6;
+      padding-inline-start: 70px;
+      padding-inline-end: 70px;
+      padding-block-start: 30px;
+      padding-block-end: 30px;
+      border-radius: 10px;
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .buttons-title {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      padding-bottom: 5px;
+      text-align: center;
+      color: rgb(209, 209, 209);
+    }
+
+    @media screen and (max-width: 600px) {
+      #buttons-cont {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="start-background">
+    <div id="game-logo"></div>
+    <div id="buttons-cont">
+      <div>
+        <div class="buttons-title">Already have an account?</div>
+        <button class="buttons" onclick="goToLogIn()">Sign In</button>
+      </div>
+      <div>
+        <div class="buttons-title">Create a new account</div>
+        <button class="buttons" onclick="goToSignUp()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var color = '';
+    function goToSignUp() {
+      window.location.href = "signup.html";
+    }
+
+    function goToLogIn() {
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+
+
+
+</html>

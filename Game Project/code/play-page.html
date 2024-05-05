@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #play-background {
+            background-image: url('play-background-1.jpg');
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        #pause {
+            background-image: url('pause-1.png');
+            width: 3vw;
+            height: 3vw;
+            background-size: contain;
+            align-self: flex-start;
+            cursor: pointer;
+        }
+
+        #home-button {
+            background-image: url('home-button.png');
+            width: 3vw;
+            height: 3vw;
+            background-size: contain;
+            align-self: flex-end;
+            cursor: pointer;
+        }
+        #top-buttons{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+        }
+        #player-container {
+            padding: 10px; 
+        }
+
+        #player {
+            width: 5vw;
+            height: 5vw;
+            background-size: contain;
+        }
+
+        #player.yellow {
+            background-image: url('player-yellow.png');
+        }
+
+        #player.black {
+            background-image: url('player-black.png');
+        }
+
+        #player.green {
+            background-image: url('player-green.png');
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="play-background">
+        <div id="top-buttons">
+            <div id="top-left">
+                <div id="pause" onclick="goToPause()"></div>
+            </div>
+            <div id="top-right">
+                <div id="home-button" onclick="goToHomePage()"></div>
+            </div>
+        </div>
+        <br>
+        <div id="player-container">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <script>
+        var email = sessionStorage.getItem('email');
+
+        sessionStorage.setItem('email', email);
+
+        var username = sessionStorage.getItem('username');
+        sessionStorage.setItem('username', username);
+
+        var color = sessionStorage.getItem('color');
+        sessionStorage.setItem('color', color);
+
+        var language = sessionStorage.getItem('lang');
+        sessionStorage.setItem('lang', language);
+
+        document.getElementById('player').classList.add(color);
+
+        function goToPause() {
+            window.location.href = "pause-page.html"
+        }
+        function goToHomePage() {
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+    </script>
+</body>
+
+</html>

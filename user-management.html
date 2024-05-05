@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #leaderboard-background {
+            background-image: url('menu-background-4.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #board {
+            background-color: rgb(221, 221, 221);
+            width: 500px;
+            padding: 50px;
+        }
+
+        #return {
+            background-image: url('back.png');
+            position: absolute;
+            width: 5vw;
+            height: 5vw;
+            top: 2vh;
+            left: 2vw;
+            background-size: contain;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #355e81;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="leaderboard-background">
+        <div id="return" onclick="goToHomePage()"></div>
+        <div id="board">
+            <h3 style="text-align: center;">User management</h3>
+            <br>
+            <h5>Create a new user:</h5>
+            <button class="button" onclick="goToNewUser()">New User</button>
+            <br>
+            <br>
+            <br>
+            <h5>Ban a user:</h5>
+            <button class="button" onclick="goToBanUser()">Ban User</button>
+        </div>
+    </div>
+
+
+    <script>
+        var email = sessionStorage.getItem('email');
+        sessionStorage.setItem('email', email);
+
+        var color = sessionStorage.getItem('color');
+        sessionStorage.setItem('color', color);
+
+        var username = document.getElementById('username').value;
+        sessionStorage.setItem('username', username);
+
+        var language = sessionStorage.getItem('lang');
+        sessionStorage.setItem('lang', language);
+
+
+        function goToHomePage() {
+            if (email === "admin@gmail.com") {
+                window.location.href = "admin-home-page.html";
+            } else {
+                window.location.href = "user-home-page.html";
+            }
+        }
+
+        function goToNewUser() {
+            window.location.href = "new-user.html";
+        }
+
+        function goToBanUser() {
+            window.location.href = "ban-user.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

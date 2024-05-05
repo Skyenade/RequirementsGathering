@@ -124,7 +124,7 @@
         document.getElementById("passworderr").innerHTML = '';
       }
 
-      if (!passwordPattern.test(username)) {
+      if (!usernamePattern.test(username)) {
         document.getElementById("usernameerr").innerHTML = "INVALID USERNAME";
         isValid = false;
       } else {
@@ -139,7 +139,6 @@
       }
 
       if (isValid) {
-        sessionStorage.setItem('email', email);
         window.location.href = "login.html";
       }
 

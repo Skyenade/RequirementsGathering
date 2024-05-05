@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <style>
+    body {
+      background-image: url('menu-background-4.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      flex-direction: column;
+    }
+
+    #game-logo {
+      background-image: url('home-page-logo.jpg');
+      width: 200px;
+      height: 200px;
+      background-size: 100%;
+    }
+
+    #buttons-cont {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .buttons-title {
+      color: white;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #355e81;
+      color: white;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    #bottom-buttons {
+      display: flex;
+      justify-content: center;
+      width: 90%;
+      gap: 40px;
+      margin-top: 100px;
+    }
+
+    #bottom-buttons-2,
+    #bottom-buttons-3,
+    #bottom-buttons-4,
+    #bottom-buttons-5 {
+      width: 250px;
+      background-color: grey;
+    }
+
+    #username-div {
+      color: rgb(255, 149, 149);
+      background-color: rgb(76, 77, 81);
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      width: 90%;
+      text-align: center;
+      font-size: small;
+      margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: 600px) {
+      #bottom-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #username-div {
+        align-self: flex-start;
+        margin-top: 20px;
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="username-div"></div>
+  <div id="start-background">
+
+    <br>
+    <div id="game-logo"></div>
+    <br>
+    <div id="buttons-cont">
+      <button id="play" class="buttons" onclick="goToPlay()">Play</button>
+      <br>
+      <button id="leaderboard" class="buttons" onclick="goToLeaderboard()">Leaderboard</button>
+    </div>
+    <br>
+  </div>
+
+
+
+  <div id="bottom-buttons">
+    <button id="bottom-buttons-4" class="buttons" onclick="goToStartPage()">Sign Out</button>
+    <button id="bottom-buttons-5" class="buttons" onclick="goToUserManagement()">User Management</button>
+    <button id="bottom-buttons-2" class="buttons" onclick="goToCustomize()">Customize</button>
+    <button id="bottom-buttons-3" class="buttons" onclick="goToSettings()">Settings</button>
+  </div>
+
+
+
+
+
+  <script>
+    var username = sessionStorage.getItem('username');
+    var email = sessionStorage.getItem('email');
+
+    var color = sessionStorage.getItem('color');
+    sessionStorage.setItem('color', color);
+
+    var language = sessionStorage.getItem('lang');
+    sessionStorage.setItem('lang', language);
+
+    sessionStorage.setItem('email', email);
+
+    document.getElementById('username-div').textContent = `Admin: ` + email;
+
+    function goToPlay() {
+      window.location.href = "play-page.html";
+    }
+
+    function goToLeaderboard() {
+      window.location.href = "leaderboard-page.html";
+    }
+
+    function goToStartPage() {
+      window.location.href = "start-page.html";
+    }
+
+    function goToSettings() {
+      window.location.href = "settings.html";
+    }
+
+    function goToCustomize() {
+      window.location.href = "customize.html"
+    }
+
+    function goToUserManagement() {
+      window.location.href = "user-management.html";
+    }
+
+  </script>
+
+</body>
+
+</html>

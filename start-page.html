@@ -4,33 +4,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Start Page</title>
   <!-- <link rel="stylesheet" type="text/css" href="game.css"> -->
   <style>
+    
+
     #start-background {
       background-color: #332a40;
-      height: 100vh;
+      flex-grow: 2;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
+      flex-direction: column;
+      height: 100vh;
     }
 
     #game-logo {
       width: 500px;
       height: 230px;
       background-image: url("game-logo.jpg");
-      display: flex;
       background-size: 100%;
       border-radius: 10px;
     }
 
     #buttons-cont {
-      position: absolute;
-      bottom: 5%;
       display: flex;
       align-items: center;
       gap: 500px;
+      margin-top: 180px;
     }
 
     .buttons {
@@ -51,6 +52,14 @@
       text-align: center;
       color: rgb(209, 209, 209);
     }
+
+    @media screen and (max-width: 600px) {
+      #buttons-cont {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 
@@ -70,6 +79,7 @@
   </div>
 
   <script>
+    var color = '';
     function goToSignUp() {
       window.location.href = "signup.html";
     }
